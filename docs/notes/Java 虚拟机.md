@@ -122,10 +122,13 @@ public class Test {
         Test b = new Test();
         a.instance = b;
         b.instance = a;
+        a = null;
+        b = null;
+        doSomething();
     }
 }
 ```
-
+在上述代码中,a与b引用的对象实例互相持有了对象的引用,因此当我们把对a对象与b对象的引用去除之后,由于两个对象还存在互相之间的引用,导致两个Test对象无法被回收。
 ### 2. 可达性分析算法
 
 以 GC Roots 为起始点进行搜索，可达的对象都是存活的，不可达的对象可被回收。
